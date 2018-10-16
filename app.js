@@ -1,5 +1,6 @@
 var restify = require('restify');
 var builder = require('botbuilder');
+var https = require('https');
 
 // Setup the Restify Server - HTTP Server
 var server = restify.createServer();
