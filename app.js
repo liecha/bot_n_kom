@@ -14,7 +14,7 @@ var connector = new builder.ChatConnector({
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 
-/*
+/* 
 // REMOTE - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: "6af26d40-d084-4120-923e-1332c118b25b",
