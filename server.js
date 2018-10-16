@@ -7,20 +7,20 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
-
+/* 
 // LOCAL - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
+*/
 
-/* 
 // REMOTE - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
-    appId: "6af26d40-d084-4120-923e-1332c118b25b",
-    appPassword: "ajmrkuHC88978]mUURTN??*"
+    appId: "9e8bb3a3-1d5e-40e2-ba8c-89d449c9a2b3",
+    appPassword: "nkistUMVJ041#!jjGXO57+%"
 });
-*/
+
 
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
