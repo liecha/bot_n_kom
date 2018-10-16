@@ -17,8 +17,8 @@ var connector = new builder.ChatConnector({
 
 // REMOTE - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
-    appId: "9e8bb3a3-1d5e-40e2-ba8c-89d449c9a2b3",
-    appPassword: "nkistUMVJ041#!jjGXO57+%"
+    appId: "3270b9e3-aac1-46cd-99f1-1221f36f84cd",
+    appPassword: "xubmuNF766:;bcQFKOR22{)"
 });
 
 
