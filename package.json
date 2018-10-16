@@ -1,11 +1,11 @@
 {
-  "name": "norrkpings-kommun-bot",
+  "name": "bot_n_kom",
   "version": "1.0.0",
   "description": "Demo bot with simple flow for Norrköpings Kommun",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "author": "emeLIE CHAndni",
   "license": "ISC",
