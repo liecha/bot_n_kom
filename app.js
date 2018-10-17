@@ -27,6 +27,7 @@ var connector = new builder.ChatConnector({
 server.post('/api/messages', connector.listen());
 
 //Main dialogue
+var inMemoryStorage = new builder.MemoryBotStorage();
 var bot = new builder.UniversalBot(connector, [
     function (session) {
         const card = new builder.ThumbnailCard(session)
@@ -42,7 +43,7 @@ var bot = new builder.UniversalBot(connector, [
         const myMessage = new builder.Message(session).addAttachment(card);
         session.endConversation(myMessage);
     }
-]);
+]).set('storage', inMemoryStorage); // Register in memory storage
 
 // Send welcome when conversation with bot is started, by initiating the root dialog
 bot.on('conversationUpdate', function (message) {
