@@ -14,5 +14,9 @@
     "botbuilder-azure": "^4.0.6",
     "request": "^2.82.0",
     "restify": "^5.2.1"
-  }
+  },
+  "conversationId": "abc123",
+  "token": "R7Zc6fEuzPw.cwA.XRU.NXQ_gqAm0PVkPXbId0JY2g6_DG-7lIo8yCx-B7UQbR0",
+  "expires_in": 1800,
+  "streamUrl": "https://directline.botframework.com/v3/directline/conversations/abc123/stream?t=RCurR_XV9ZA.cwA..."
 }
