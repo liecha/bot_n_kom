@@ -44,6 +44,7 @@ var bot = new builder.UniversalBot(connector, [
     }
 ]);
 
+/*
 // Send welcome when conversation with bot is started, by initiating the root dialog
 bot.on('conversationUpdate', function (message) {
     if (message.membersAdded) {
@@ -53,7 +54,7 @@ bot.on('conversationUpdate', function (message) {
             }
         });
     }
-});
+});*/
 
 // Insert a avatar picture for the bot
 function getSampleCardImages(session) {
