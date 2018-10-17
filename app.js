@@ -2,12 +2,23 @@ var restify = require('restify');
 var builder = require('botbuilder');
 var https = require('https');
 
+function respond(req, res, next) {
+    res.send('hello ' + req.params.name);
+    next();
+  }
+  
+  var server = restify.createServer();
+  server.get('/hello/:name', respond);
+  server.head('/hello/:name', respond);
+
+
+/*
 // Setup the Restify Server - HTTP Server
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
-
+*/
 /* 
 // LOCAL - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
@@ -15,7 +26,7 @@ var connector = new builder.ChatConnector({
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 */
-
+/*
 // REMOTE - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: "3270b9e3-aac1-46cd-99f1-1221f36f84cd",
@@ -128,3 +139,4 @@ bot.dialog('reachMailFromHome', (session) => {
         const myMessage = new builder.Message(session).addAttachment(card);
         session.endConversation(myMessage);
 }).triggerAction( { matches: /mail hemifrån/ } );
+*/
