@@ -36,9 +36,9 @@ var bot = new builder.UniversalBot(connector, [
             .text('Vad önskar du få hjälp med?')
             .images(getSampleCardImages(session))
             .buttons([
-                builder.CardAction.imBack(session, "Byta lösenord till Heroma", "Jag vill byta lösenord till Heroma."),
-                builder.CardAction.imBack(session, "Information kring GDPR", "Jag vill gå information kring GDPR."),
-                builder.CardAction.imBack(session, "Nå mail hemifrån", "Jag vill nå min mail hemifrån.")
+                builder.CardAction.imBack(session, "Jag vill byta lösenord till Heroma.", "Byta lösenord till Heroma"),
+                builder.CardAction.imBack(session, "Jag vill gå information kring GDPR.", "Information kring GDPR"),
+                builder.CardAction.imBack(session, "Jag vill nå min mail hemifrån.", "Nå mail hemifrån")
             ]);
         const myMessage = new builder.Message(session).addAttachment(card);
         session.endConversation(myMessage);
