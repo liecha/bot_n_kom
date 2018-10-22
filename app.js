@@ -36,9 +36,9 @@ var bot = new builder.UniversalBot(connector, [
             .text('Vad önskar du få hjälp med?')
             .images(getSampleCardImages(session))
             .buttons([
-                builder.CardAction.imBack(session, "Byta lösenord till Heroma", "Byta lösenord till Heroma"),
-                builder.CardAction.imBack(session, "Information kring GDPR", "Information kring GDPR"),
-                builder.CardAction.imBack(session, "Nå mail hemifrån", "Nå mail hemifrån")
+                builder.CardAction.imBack(session, "Byta lösenord till Heroma", "Jag vill byta lösenord till Heroma."),
+                builder.CardAction.imBack(session, "Information kring GDPR", "Jag vill gå information kring GDPR."),
+                builder.CardAction.imBack(session, "Nå mail hemifrån", "Jag vill nå min mail hemifrån.")
             ]);
         const myMessage = new builder.Message(session).addAttachment(card);
         session.endConversation(myMessage);
@@ -78,8 +78,8 @@ bot.dialog('changePassword', (session) => {
         .text('Är du chef eller lönerapportör?')
         .images(getSampleCardImages(session))
         .buttons([
-            builder.CardAction.imBack(session, "Jag är chef eller lönerapportör", "JA"),
-            builder.CardAction.imBack(session, "Jag är inte chef eller lönerapportör", "NEJ"),
+            builder.CardAction.imBack(session, "Jag är chef eller lönerapportör.", "JA"),
+            builder.CardAction.imBack(session, "Jag är inte chef eller lönerapportör.", "NEJ"),
         ]);
         const myMessage = new builder.Message(session).addAttachment(card);
         session.endConversation(myMessage);
