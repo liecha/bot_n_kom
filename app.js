@@ -8,23 +8,23 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
-/* 
+ 
 // LOCAL - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
-*/
 
+/*
 // REMOTE - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: "3270b9e3-aac1-46cd-99f1-1221f36f84cd",
     appPassword: "xubmuNF766:;bcQFKOR22{)"
 });
-
+*/
 
 // Listen for messages from users 
-server.post('/api/messages', connector.listen());
+nserver.post('/api/messages', connector.listen());
 
 //Main dialogue
 var inMemoryStorage = new builder.MemoryBotStorage();
@@ -59,7 +59,7 @@ bot.on('conversationUpdate', function (message) {
 // Insert a avatar picture for the bot
 function getSampleCardImages(session) {
     return [
-        builder.CardImage.create(session, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5k4Z6yIQA-NcX0sWdQCkgvI_kgHv7nAUqjBL6oAOMlPtRDb9now')
+        builder.CardImage.create(session, 'https://www.iconsdb.com/icons/preview/orange/chat-xxl.png')
     ];
 }
 
