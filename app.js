@@ -15,7 +15,7 @@ var connector = new builder.ChatConnector({
 });
 
 // Listen for messages from users 
-nserver.post('/api/messages', connector.listen());
+server.post('/api/messages', connector.listen());
 
 //Main dialogue
 var inMemoryStorage = new builder.MemoryBotStorage();
@@ -51,13 +51,6 @@ bot.on('conversationUpdate', function (message) {
 function getSampleCardImages(session) {
     return [
         builder.CardImage.create(session, 'https://www.iconsdb.com/icons/preview/orange/chat-xxl.png')
-    ];
-}
-
-// Insert a avatar picture for the user
-function getSampleCardImagesUser(session) {
-    return [
-        builder.CardImage.create(session, 'https://cdn1.vectorstock.com/i/1000x1000/01/85/comic-chat-bubble-vector-19580185.jpg')
     ];
 }
 
