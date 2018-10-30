@@ -8,6 +8,14 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
+/*
+// LOCAL - Create chat connector for communicating with the Bot Framework Service
+var connector = new builder.ChatConnector({
+    appId: process.env.MICROSOFT_APP_ID,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD
+});
+*/
+
 // REMOTE - Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
     appId: "3270b9e3-aac1-46cd-99f1-1221f36f84cd",
@@ -55,61 +63,141 @@ function getSampleCardImages(session) {
 }
 
 // Change password in Heroma
-bot.dialog('changePassword', (session) => {
-    const card = new builder.ThumbnailCard(session)
-        .title(' ')
-        .subtitle('För att kunna hjälpa dig ytterligare behöver jag veta om du är chef eller lönerapportör.')
-        .text('Är du chef eller lönerapportör?')
-        .images(getSampleCardImages(session))
-        .buttons([
-            builder.CardAction.imBack(session, "Jag är chef eller lönerapportör.", "JA"),
-            builder.CardAction.imBack(session, "Jag är inte chef eller lönerapportör.", "NEJ"),
-        ]);
-        const myMessage = new builder.Message(session).addAttachment(card);
-        session.endConversation(myMessage);
-}).triggerAction( { matches: /lösenord/ } );
+bot.dialog('changePassword', [
+    function (session) {
+        const card = new builder.ThumbnailCard(session)
+            .title(' ')
+            .subtitle('För att kunna hjälpa dig ytterligare behöver jag veta om du är chef eller lönerapportör.')
+            .text('Är du chef eller lönerapportör?')
+            .images(getSampleCardImages(session))
+            .buttons([
+                builder.CardAction.imBack(session, "Jag är chef eller lönerapportör.", "JA"),
+                builder.CardAction.imBack(session, "Jag är inte chef eller lönerapportör.", "NEJ"),
+            ]);
+            const myMessage = new builder.Message(session).addAttachment(card);
+            session.endConversation(myMessage);
+        }
+]).triggerAction( { matches: /lösenord/ } );
 
-bot.dialog('Ja', (session) => {
-    const card = new builder.ThumbnailCard(session)
-        .title(' ')
-        .subtitle('För att få ett nytt lösenord till Heroma som chef/lönerapportör behöver du kontakta LK-data.')
-        .text('LK-data: 013 - 20 69 69')
-        .images(getSampleCardImages(session))
-    const myMessage = new builder.Message(session).addAttachment(card);
-    session.endConversation(myMessage);
-}).triggerAction( { matches: /Jag är chef/ } );
+bot.dialog('Ja', [
+    function (session) {
+        var msg = new builder.Message(session);
+        msg.attachmentLayout(builder.AttachmentLayout.list)
+        msg.attachments([
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('För att få ett nytt lösenord till Heroma som chef/lönerapportör behöver du kontakta LK-data.')
+                .text('LK-data: 013 - 20 69 69')
+                .images(getSampleCardImages(session)),
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Är du nöjd med den hjälp du fått?')
+                .buttons([
+                    builder.CardAction.imBack(session, "Jag är nöjd med din hjälp - tack och på återseende!", "JA"),
+                    builder.CardAction.imBack(session, "Jag är inte nöjd.", "NEJ"),
+                ])
+            ]);
+        session.send(msg)
+    }
+]).triggerAction( { matches: /Jag är chef/ } );
 
-bot.dialog('Nej', (session) => {
-    const card = new builder.ThumbnailCard(session)
-        .title(' ')
-        .subtitle('För att få ett nytt lösenord till Heroma behöver du kontakta din lönerapportör.')
-        .images(getSampleCardImages(session))
-    const myMessage = new builder.Message(session).addAttachment(card);
-    session.endConversation(myMessage);
-}).triggerAction( { matches: /Jag är inte/ } );
+bot.dialog('Nej', [
+    function (session) {
+        var msg = new builder.Message(session);
+        msg.attachmentLayout(builder.AttachmentLayout.list)
+        msg.attachments([
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('För att få ett nytt lösenord till Heroma behöver du kontakta din lönerapportör.')
+                .images(getSampleCardImages(session)),
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Är du nöjd med den hjälp du fått?')
+                .buttons([
+                    builder.CardAction.imBack(session, "Jag är nöjd med din hjälp - tack och på återseende!", "JA"),
+                    builder.CardAction.imBack(session, "Jag är inte nöjd.", "NEJ"),
+                ])
+            ]);
+        session.send(msg)
+    }
+]).triggerAction( { matches: /Jag är inte/ } );
 
 // Get information about GDPR
-bot.dialog('infoAboutGdpr', (session) => {
-    const card = new builder.ThumbnailCard(session)
-    .title(' ')
-    .subtitle('Tyck på knappen "Info GDPR" nedan för att få mer information om GDPR. Läs exempelvis om vem som är ansvarig för GDPR eller vem som är dataskyddsombud.')
-    .images(getSampleCardImages(session))
-    .buttons([
-        builder.CardAction.openUrl(session, "http://www.norrkoping.se/dataskyddsforordningen---gdpr.html", "Info GDPR"),
-    ]);
-    const myMessage = new builder.Message(session).addAttachment(card);
-    session.endConversation(myMessage);
-}).triggerAction( { matches: /GDPR/ } );
+bot.dialog('infoAboutGdpr', [
+    function (session) {
+        var msg = new builder.Message(session);
+        msg.attachmentLayout(builder.AttachmentLayout.list)
+        msg.attachments([
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Tyck på knappen "Info GDPR" nedan för att få mer information om GDPR. Läs exempelvis om vem som är ansvarig för GDPR eller vem som är dataskyddsombud.')
+                .images(getSampleCardImages(session))
+                .buttons([
+                    builder.CardAction.openUrl(session, "http://www.norrkoping.se/dataskyddsforordningen---gdpr.html", "Info GDPR"),
+                ]),
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Är du nöjd med den hjälp du fått?')
+                .buttons([
+                    builder.CardAction.imBack(session, "Jag är nöjd med din hjälp - tack och på återseende!", "JA"),
+                    builder.CardAction.imBack(session, "Jag är inte nöjd.", "NEJ"),
+                ])
+            ]);
+        session.send(msg)
+    }
+]).triggerAction( { matches: /GDPR/ } );
 
 // Want to reach mail box from home
-bot.dialog('reachMailFromHome', (session) => {
-    const card = new builder.ThumbnailCard(session)
-        .title(' ')
-        .subtitle('Tyck på knappen "Webmail" nedan för att nå mailen hemifrån. Logga in med ditt användarid och tillhörande lösenord.')
-        .images(getSampleCardImages(session))
-        .buttons([
-            builder.CardAction.openUrl(session, "https://epost.norrkoping.se/", "Webmail"),
-        ]);
-        const myMessage = new builder.Message(session).addAttachment(card);
-        session.endConversation(myMessage);
-}).triggerAction( { matches: /mail hemifrån/ } );
+bot.dialog('reachMailFromHome', [
+    function (session) {
+        var msg = new builder.Message(session);
+        msg.attachmentLayout(builder.AttachmentLayout.list)
+        msg.attachments([
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Tyck på knappen "Webmail" nedan för att nå mailen hemifrån. Logga in med ditt användarid och tillhörande lösenord.')
+                .images(getSampleCardImages(session))
+                .buttons([
+                    builder.CardAction.openUrl(session, "https://epost.norrkoping.se/", "Webmail"),
+                ]),
+            new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Är du nöjd med den hjälp du fått?')
+                .buttons([
+                    builder.CardAction.imBack(session, "Jag är nöjd med din hjälp - tack och på återseende!", "JA"),
+                    builder.CardAction.imBack(session, "Jag är inte nöjd.", "NEJ"),
+                ])
+            ]);
+        session.send(msg)
+    }
+]).triggerAction( { matches: /mail hemifrån/} );
+
+// Happy with answer
+bot.dialog('happy', [
+    function (session) {
+        const card = new builder.ThumbnailCard(session)
+            .title(' ')
+            .subtitle('Tack själv - på återseende.')
+            .images(getSampleCardImages(session))
+            const myMessage = new builder.Message(session).addAttachment(card);
+            session.endConversation(myMessage);
+    }
+]).triggerAction( { matches: /Jag är nöjd med din hjälp/ } );
+
+// NOT happy with answer
+bot.dialog('notHappy', [
+    function (session) {
+        const card = new builder.ThumbnailCard(session)
+                .title(' ')
+                .subtitle('Låt oss titta på alternativen en gång till och se om jag kan hjälpa dig bättre denna gången.')
+                .text('Vad önskar du få hjälp med?')
+                .images(getSampleCardImages(session))
+                .buttons([
+                    builder.CardAction.imBack(session, "Jag vill byta lösenord till Heroma.", "Byta lösenord till Heroma"),
+                    builder.CardAction.imBack(session, "Jag vill få information kring GDPR.", "Information kring GDPR"),
+                    builder.CardAction.imBack(session, "Jag vill nå min mail hemifrån.", "Nå mail hemifrån")
+                ]);
+            const myMessage = new builder.Message(session).addAttachment(card);
+            session.endConversation(myMessage);
+    }
+]).triggerAction( { matches: /Jag är inte nöjd/ } );
