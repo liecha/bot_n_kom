@@ -130,7 +130,7 @@ bot.dialog('infoAboutGdpr', [
         msg.attachments([
             new builder.ThumbnailCard(session)
                 .title(' ')
-                .subtitle('Tyck på knappen "Info GDPR" nedan för att få mer information om GDPR. Läs exempelvis om vem som är ansvarig för GDPR eller vem som är dataskyddsombud.')
+                .subtitle('Tyck på knappen "Info GDPR" nedan för att få mer information. Läs exempelvis om vem som är ansvarig för GDPR eller vem som är dataskyddsombud.')
                 .images(getSampleCardImages(session))
                 .buttons([
                     builder.CardAction.openUrl(session, "http://www.norrkoping.se/dataskyddsforordningen---gdpr.html", "Info GDPR"),
