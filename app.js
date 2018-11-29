@@ -79,6 +79,7 @@ bot.dialog('changePassword', [
         }
 ]).triggerAction( { matches: /lösenord/ } );
 
+// Change password in Heroma - YES im a boss
 bot.dialog('Ja', [
     function (session) {
         var msg = new builder.Message(session);
@@ -101,6 +102,7 @@ bot.dialog('Ja', [
     }
 ]).triggerAction( { matches: /Jag är chef/ } );
 
+// Change password in Heroma - NO im not a boss
 bot.dialog('Nej', [
     function (session) {
         var msg = new builder.Message(session);
